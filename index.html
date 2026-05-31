@@ -3762,8 +3762,26 @@ input:checked+.toggle-track-ea::before{transform:translateX(18px);background:#ff
       // ── SUPABASE (plain fetch) ──
 const SB_URL = "https://zdmybalxjlgdtovuyzmn.supabase.co";
 const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpkbXliYWx4amxnZHRvdnV5em1uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk4ODI1MTEsImV4cCI6MjA5NTQ1ODUxMX0.Ul_qrgcSiqWaXkJK4MvzlEisJ9s4oAqDKdyWz6Ra_6E";
-      const DB_KEY = "elsaanna_main";
-      const PIN_KEY = "elsaanna_pin";
+      const DB_KEY  = 'elsaanna_main'; // kept for backward compat
+      const PIN_KEY = 'elsaanna_pin';
+
+      // ── GRANULAR KEYS ──
+      const EK = {
+        tasksDone:    'ea_tasksDone',     // {elsa:{date:{taskId:bool}}, anna:{...}}
+        customTasks:  'ea_customTasks',   // {elsa:{MORNING:[...],...}, anna:{...}}
+        taskPriority: 'ea_taskPriority',  // {userId-taskId: priority}
+        taskOverrides:'ea_taskOverrides', // {elsa:{taskId:{...}}, anna:{...}}
+        deletedTasks: 'ea_deletedTasks',  // {elsa:[taskId,...], anna:[...]}
+        streaks:      'ea_streaks',       // {elsa:{skill:count}, anna:{...}}
+        notes:        'ea_notes',         // {elsa:{win,lesson,text}, anna:{...}}
+        // ext state (previously one blob in LS_KEY_EA)
+        roughDay:     'ea_roughDay',      // {elsa:date, anna:date}
+        whyNotes:     'ea_whyNotes',      // [{id,text,...}]
+        futureLetters:'ea_futureLetters', // [{id,to,body,openDate,...}]
+        mood:         'ea_mood',          // {date:moodString}
+        roadmap:      'ea_roadmap',       // {elsa:[...], anna:[...]}
+        lastSeen:     'ea_lastSeen',      // {elsa:ISO, anna:ISO}
+      };
 
       async function sbGet(key) {
         try {
@@ -4259,14 +4277,28 @@ const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
       };
 
       async function initApp() {
-        const v = await sbGet(DB_KEY);
-        if (v) {
-          try {
-            const parsed = typeof v === "string" ? JSON.parse(v) : v;
-            mergeState(parsed);
-          } catch (e) {}
-        }
+        ensureState(); // defaults first
+        function parse(v){ try{ return v?JSON.parse(v):null; }catch(e){return null;} }
+
+        // Load main state slices in parallel
+        const [td, ct, tp, to_, dt, sk, nt] = await Promise.all([
+          sbGet(EK.tasksDone), sbGet(EK.customTasks), sbGet(EK.taskPriority),
+          sbGet(EK.taskOverrides), sbGet(EK.deletedTasks), sbGet(EK.streaks), sbGet(EK.notes),
+        ]);
+        const r_td=parse(td); if(r_td) state.tasksDone    = r_td;
+        const r_ct=parse(ct); if(r_ct) state.customTasks  = r_ct;
+        const r_tp=parse(tp); if(r_tp) state.taskPriority = r_tp;
+        const r_to=parse(to_);if(r_to) state.taskOverrides= r_to;
+        const r_dt=parse(dt); if(r_dt) state.deletedTasks = r_dt;
+        const r_sk=parse(sk); if(r_sk) state.streaks      = r_sk;
+        const r_nt=parse(nt); if(r_nt) state.notes        = r_nt;
         ensureState();
+
+        // Fallback: also try legacy single-blob key for first-time migration
+        if(!r_td){
+          const legacy = await sbGet(DB_KEY);
+          if(legacy){ try{ mergeState(typeof legacy==='string'?JSON.parse(legacy):legacy); }catch(e){} }
+        }
       }
 
       function mergeState(loaded) {
@@ -4345,19 +4377,24 @@ const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
           state.notes.anna = { win: "", lesson: "", text: "" };
       }
 
+      // ── GRANULAR SAVE HELPERS ──
+      async function saveSliceEA(key, data){
+        await sbSet(key, JSON.stringify(data));
+      }
+      async function saveTasksDone()    { await saveSliceEA(EK.tasksDone,    state.tasksDone); }
+      async function saveCustomTasksEA(){ await saveSliceEA(EK.customTasks,  state.customTasks); }
+      async function saveTaskPriorityEA(){ await saveSliceEA(EK.taskPriority, state.taskPriority); }
+      async function saveTaskOverridesEA(){ await saveSliceEA(EK.taskOverrides, state.taskOverrides); }
+      async function saveDeletedTasksEA(){ await saveSliceEA(EK.deletedTasks, state.deletedTasks); }
+      async function saveStreaksEA()    { await saveSliceEA(EK.streaks,      state.streaks); }
+      async function saveNotesEA()      { await saveSliceEA(EK.notes,        state.notes); }
+
+      // Legacy saveState — routes each field to its own key
       async function saveState() {
-        await sbSet(
-          DB_KEY,
-          JSON.stringify({
-            tasksDone: state.tasksDone,
-            customTasks: state.customTasks,
-            taskPriority: state.taskPriority,
-            taskOverrides: state.taskOverrides,
-            deletedTasks: state.deletedTasks,
-            streaks: state.streaks,
-            notes: state.notes,
-          }),
-        );
+        await Promise.all([
+          saveTasksDone(), saveCustomTasksEA(), saveTaskPriorityEA(),
+          saveTaskOverridesEA(), saveDeletedTasksEA(), saveStreaksEA(), saveNotesEA(),
+        ]);
         if (state.page === "sister") renderSisterProgress();
       }
 
@@ -4647,7 +4684,7 @@ const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
           if (state.streaks[state.user][t.tag] > 0)
             state.streaks[state.user][t.tag]--;
         }
-        saveState().then(() => renderAll());
+        Promise.all([saveTasksDone(),saveStreaksEA()]).then(() => renderAll());
       }
 
       function deleteTask(id, e) {
@@ -4673,7 +4710,7 @@ const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
         delete state.taskPriority[`${state.user}-${id}`];
         if (state.taskOverrides[state.user])
           delete state.taskOverrides[state.user][id];
-        saveState().then(() => {
+        Promise.all([saveTasksDone(),saveCustomTasksEA(),saveTaskPriorityEA(),saveTaskOverridesEA(),saveDeletedTasksEA()]).then(() => {
           renderAll();
           showToast("Task deleted ✦");
         });
@@ -4803,7 +4840,7 @@ const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
             state.taskPriority[`${state.user}-${editingTaskId}`] =
               selectedPriority;
             state.period = period;
-            saveState().then(() => {
+            Promise.all([saveCustomTasksEA(),saveTaskPriorityEA(),saveTaskOverridesEA()]).then(() => {
               renderAll();
               showToast("Task updated ✦");
             });
@@ -4825,7 +4862,7 @@ const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
           if (selectedPriority !== "none")
             state.taskPriority[`${state.user}-${id}`] = selectedPriority;
           state.period = period;
-          saveState().then(() => {
+          Promise.all([saveCustomTasksEA(),saveTaskPriorityEA()]).then(() => {
             renderAll();
             showToast("Task added ✦");
           });
@@ -5371,16 +5408,30 @@ const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
 
       // ── SUPABASE KEYS for new data ──
       const LS_KEY_EA = 'elsaanna_ext';       // extended state (rough day, why, time capsule)
-      const LAST_SEEN_KEY_EA = 'elsaanna_lastseen';
+      const LAST_SEEN_KEY_EA = EK.lastSeen;
       const TODAY_EA = new Date().toISOString().split('T')[0];
 
       // ── EXTENDED STATE ──
       let extState = { roughDay:{}, whyNotes:[], futureLetters:[], mood:{} };
 
       async function loadExtState(){
-        const v = await sbGet(LS_KEY_EA);
-        if(v){ try{ const p=typeof v==='string'?JSON.parse(v):v; Object.assign(extState,p); }catch(e){} }
         ensureExtState();
+        function parse(v){ try{ return v?JSON.parse(v):null; }catch(e){return null;} }
+        const [rd, wn, fl, mo, rm] = await Promise.all([
+          sbGet(EK.roughDay), sbGet(EK.whyNotes), sbGet(EK.futureLetters),
+          sbGet(EK.mood), sbGet(EK.roadmap),
+        ]);
+        const r_rd=parse(rd); if(r_rd) extState.roughDay     = r_rd;
+        const r_wn=parse(wn); if(r_wn) extState.whyNotes     = r_wn;
+        const r_fl=parse(fl); if(r_fl) extState.futureLetters= r_fl;
+        const r_mo=parse(mo); if(r_mo) extState.mood         = r_mo;
+        const r_rm=parse(rm); if(r_rm) extState.roadmap      = r_rm;
+        ensureExtState();
+        // Fallback: legacy single-blob ext key for migration
+        if(!r_rd && !r_wn && !r_fl){
+          const legacy=await sbGet('elsaanna_ext');
+          if(legacy){ try{ const p=typeof legacy==='string'?JSON.parse(legacy):legacy; Object.assign(extState,p); }catch(e){} }
+        }
       }
       function ensureExtState(){
         if(!extState.roughDay)extState.roughDay={};
@@ -5389,7 +5440,19 @@ const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
         if(!extState.mood)extState.mood={};
         if(!extState.roadmap)extState.roadmap={elsa:[],anna:[]};
       }
-      async function saveExtState(){ await sbSet(LS_KEY_EA, JSON.stringify(extState)); }
+      // ── EXT GRANULAR SAVE HELPERS ──
+      async function saveRoughDayEA()     { await saveSliceEA(EK.roughDay,     extState.roughDay||{}); }
+      async function saveWhyNotesEA()     { await saveSliceEA(EK.whyNotes,     extState.whyNotes||[]); }
+      async function saveFutureLettersEA(){ await saveSliceEA(EK.futureLetters,extState.futureLetters||[]); }
+      async function saveMoodEA()         { await saveSliceEA(EK.mood,         extState.mood||{}); }
+      async function saveRoadmapEA()      { await saveSliceEA(EK.roadmap,      extState.roadmap||{}); }
+
+      // Legacy saveExtState — routes each field to its own key
+      async function saveExtState(){
+        await Promise.all([
+          saveRoughDayEA(), saveWhyNotesEA(), saveFutureLettersEA(), saveMoodEA(), saveRoadmapEA(),
+        ]);
+      }
 
       // ── LAST SEEN ──
       async function updateLastSeenEA(){
@@ -5437,7 +5500,7 @@ const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
       };
       function logMoodEA(m){
         extState.mood[TODAY_EA]=m;
-        saveExtState();
+        saveMoodEA();
         showToastEA(MOOD_MESSAGES_EA[m]||'noted ✦');
       }
 
@@ -5456,7 +5519,7 @@ const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
       }
       function enableRoughDayEA(){
         extState.roughDay[TODAY_EA+'-'+state.user]=true;
-        saveExtState().then(()=>{renderRoughDay();showToastEA('🌸 Taking it slow. Rest well.');});
+        saveRoughDayEA().then(()=>{renderRoughDay();showToastEA('🌸 Taking it slow. Rest well.');});
       }
 
       // ── TIME CAPSULE / FUTURE LETTERS ──
@@ -5504,12 +5567,12 @@ const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
         if(!text){showToastEA('Write something first ✦');return;}
         if(!date){showToastEA('Pick a date 📅');return;}
         extState.futureLetters.push({id:Date.now().toString(),from:state.user,text,openDate:date,createdOn:TODAY_EA});
-        saveExtState().then(()=>{renderFutureLettersEA();showToastEA('Sealed with love 🔒');});
+        saveFutureLettersEA().then(()=>{renderFutureLettersEA();showToastEA('Sealed with love 🔒');});
       }
       function deleteFutureLetterEA(id){
         if(!confirm('Delete this letter?'))return;
         extState.futureLetters=extState.futureLetters.filter(l=>l.id!==id);
-        saveExtState().then(()=>renderFutureLettersEA());
+        saveFutureLettersEA().then(()=>renderFutureLettersEA());
       }
 
       // ── WHY NOTES ──
@@ -5546,20 +5609,20 @@ const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
         if(!val){showToastEA('Write something first ✦');return;}
         extState.whyNotes.unshift({text:val,editing:false});
         document.getElementById('why-input').value='';
-        saveExtState().then(()=>{renderWhyEA();showToastEA('Added ✦');});
+        saveWhyNotesEA().then(()=>{renderWhyEA();showToastEA('Added ✦');});
       }
       function editWhyNoteEA(i){extState.whyNotes[i].editing=true;renderWhyEA();}
       function saveWhyNoteEA(i){
         const val=document.getElementById('why-edit-'+i).value.trim();
         if(!val){showToastEA('Cannot be empty');return;}
         extState.whyNotes[i].text=val;extState.whyNotes[i].editing=false;
-        saveExtState().then(()=>{renderWhyEA();showToastEA('Updated ✦');});
+        saveWhyNotesEA().then(()=>{renderWhyEA();showToastEA('Updated ✦');});
       }
       function cancelWhyEditEA(i){extState.whyNotes[i].editing=false;renderWhyEA();}
       function deleteWhyNoteEA(i){
         if(!confirm('Delete this note?'))return;
         extState.whyNotes.splice(i,1);
-        saveExtState().then(()=>{renderWhyEA();showToastEA('Deleted');});
+        saveWhyNotesEA().then(()=>{renderWhyEA();showToastEA('Deleted');});
       }
 
       // ── ROADMAP ──
@@ -5646,7 +5709,7 @@ const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
         if(!extState.roadmap)extState.roadmap={};
         getRoadmapStepsEA(state.user);
         extState.roadmap[state.user].push({id:'rm_'+state.user+'_'+Date.now(),title:t,desc:d||'—'});
-        saveExtState().then(()=>{renderRoadmapEA();showToastEA('Milestone added ✦');});
+        saveRoadmapEA().then(()=>{renderRoadmapEA();showToastEA('Milestone added ✦');});
       }
       function editRoadmapStepEA(i){ getRoadmapStepsEA(state.user)[i].editing=true; renderRoadmapEA(); }
       function saveRoadmapStepEA(i){
@@ -5655,13 +5718,13 @@ const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
         if(!t){showToastEA('Title cannot be empty');return;}
         const s=getRoadmapStepsEA(state.user)[i];
         s.title=t; s.desc=d||'—'; s.editing=false;
-        saveExtState().then(()=>{renderRoadmapEA();showToastEA('Updated ✦');});
+        saveRoadmapEA().then(()=>{renderRoadmapEA();showToastEA('Updated ✦');});
       }
       function cancelRoadmapEditEA(i){ getRoadmapStepsEA(state.user)[i].editing=false; renderRoadmapEA(); }
       function deleteRoadmapStepEA(i){
         if(!confirm('Delete this milestone?'))return;
         getRoadmapStepsEA(state.user).splice(i,1);
-        saveExtState().then(()=>{renderRoadmapEA();showToastEA('Deleted');});
+        saveRoadmapEA().then(()=>{renderRoadmapEA();showToastEA('Deleted');});
       }
 
       // ── SETTINGS ──
@@ -5808,8 +5871,12 @@ const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
             try{
               const msg=JSON.parse(e.data);
               if(msg.event==='INSERT'||msg.event==='UPDATE'){
-                const fresh=await sbGet(DB_KEY);
-                if(fresh){const parsed=typeof fresh==='string'?JSON.parse(fresh):fresh;mergeState(parsed);renderAll();showToastEA('✦ Synced live');}
+                // Load only fast-changing slices on live push
+                function parseWS(v){ try{ return v?JSON.parse(v):null; }catch(e){return null;} }
+                const [freshTD, freshSK] = await Promise.all([sbGet(EK.tasksDone), sbGet(EK.streaks)]);
+                const td=parseWS(freshTD); if(td) state.tasksDone=td;
+                const sk=parseWS(freshSK); if(sk) state.streaks=sk;
+                ensureState(); renderAll(); showToastEA('✦ Synced live');
               }
             }catch(e){}
           };
@@ -5823,8 +5890,17 @@ const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
       function startPollingExt(){
         clearInterval(_syncInterval);
         _syncInterval=setInterval(async()=>{
-          const fresh=await sbGet(DB_KEY);
-          if(fresh){const parsed=typeof fresh==='string'?JSON.parse(fresh):fresh;const prev=JSON.stringify({tasksDone:state.tasksDone,customTasks:state.customTasks,streaks:state.streaks,notes:state.notes});mergeState(parsed);if(JSON.stringify({tasksDone:state.tasksDone,customTasks:state.customTasks,streaks:state.streaks,notes:state.notes})!==prev){renderAll();showToastEA('✦ Synced');}}
+          // Only poll fast-changing slices
+          function parse(v){ try{ return v?JSON.parse(v):null; }catch(e){return null;} }
+          const [freshTD, freshSK] = await Promise.all([
+            sbGet(EK.tasksDone), sbGet(EK.streaks),
+          ]);
+          let changed=false;
+          const td=parse(freshTD);
+          if(td&&JSON.stringify(td)!==JSON.stringify(state.tasksDone)){state.tasksDone=td;changed=true;}
+          const sk=parse(freshSK);
+          if(sk&&JSON.stringify(sk)!==JSON.stringify(state.streaks)){state.streaks=sk;changed=true;}
+          if(changed){ensureState();renderAll();showToastEA('✦ Synced');}
           renderLastSeenEA();
         },30000);
       }
