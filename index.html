@@ -2936,7 +2936,100 @@
           0 0 12px rgba(150, 200, 255, 0.8);
         animation: sparkleTwinkle 3s ease-in-out infinite;
       }
-    </style>
+    
+/* ── ROUGH DAY ── */
+.rough-active{background:rgba(200,156,240,.1);border:1px solid rgba(200,156,240,.2);border-radius:10px;padding:12px 14px;margin-bottom:10px;text-align:center;font-size:12px;color:var(--anna);line-height:1.8}
+.soft-btn{padding:9px 20px;border-radius:100px;border:1px solid rgba(244,143,177,.35);background:rgba(244,143,177,.1);color:var(--anna);font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:.04em}
+.soft-btn:hover{background:rgba(244,143,177,.2)}
+
+/* open-when removed */
+
+/* ── MOOD ── */
+.mood-grid{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0}
+.mood-btn{padding:6px 13px;border-radius:100px;border:1px solid var(--border2);background:rgba(255,255,255,.04);color:rgba(255,255,255,.7);font-family:'Nunito',sans-serif;font-size:11px;cursor:pointer;transition:all .2s}
+.mood-btn:hover{background:rgba(100,181,246,.12);border-color:var(--elsa);color:#fff}
+
+/* ── ANNIVERSARY / COUNTDOWN banners ── */
+.anniv-banner-ea{background:linear-gradient(135deg,rgba(100,181,246,.07),rgba(244,143,177,.06));border:1px solid rgba(100,181,246,.2);border-radius:12px;padding:14px 16px;margin-bottom:12px;text-align:center}
+.anniv-days-ea{font-family:'Cinzel',serif;font-size:1.7rem;font-weight:600;background:linear-gradient(135deg,var(--elsa),var(--anna));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2}
+.anniv-label-ea{font-size:9px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;margin-top:3px}
+
+/* ── LAST SEEN ── */
+.last-seen-ea{font-size:10px;color:var(--muted2);text-align:center;padding:6px;letter-spacing:.03em;font-style:italic;border-bottom:1px solid var(--border);background:rgba(255,255,255,.02);min-height:24px}
+
+/* ── AMBIENT DOCK ── */
+.amb-dock-ea{position:fixed;right:14px;top:50%;transform:translateY(-50%);z-index:55;display:flex;flex-direction:column;gap:8px}
+.amb-btn-ea{width:38px;height:38px;border-radius:50%;border:1px solid rgba(100,181,246,.25);background:rgba(7,9,26,.65);backdrop-filter:blur(14px);color:var(--elsa);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.4);transition:all .25s}
+.amb-btn-ea:hover{transform:scale(1.08);border-color:var(--anna)}
+.amb-btn-ea.on{background:linear-gradient(135deg,rgba(100,181,246,.3),rgba(244,143,177,.25));color:#fff;border-color:rgba(100,181,246,.6)}
+
+/* ── MOTIVATIONAL TICKER ── */
+.affirm-ea{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:60;padding:8px 18px;border-radius:999px;font-size:11px;letter-spacing:.05em;font-style:italic;background:rgba(7,9,26,.72);backdrop-filter:blur(18px);border:1px solid rgba(100,181,246,.22);color:rgba(200,230,255,.9);box-shadow:0 8px 28px rgba(100,181,246,.15);opacity:0;transition:opacity .8s;pointer-events:none;max-width:90vw;text-align:center}
+.affirm-ea.show{opacity:1}
+
+/* ── TIME CAPSULE LETTERS ── */
+.fl-card-ea{border-radius:12px;padding:14px;margin-bottom:8px;position:relative;border:1px solid var(--border)}
+.fl-locked-ea{background:rgba(255,255,255,.03)}
+.fl-unlocked-ea{background:rgba(100,181,246,.05);border-color:rgba(100,181,246,.2)}
+.fl-lock-icon-ea{font-size:1.3rem;margin-bottom:4px}
+.fl-card-date-ea{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.fl-date-elsa{color:var(--elsa)}.fl-date-anna{color:var(--anna)}.fl-date-open{color:#4ade80}
+.fl-locked-txt{font-size:11px;color:var(--muted2);font-style:italic}
+.fl-preview-ea{font-size:12px;color:rgba(255,255,255,.75);line-height:1.9;white-space:pre-wrap}
+.fl-del-ea{position:absolute;top:10px;right:10px;background:transparent;border:none;color:var(--muted2);cursor:pointer;font-size:14px;transition:color .15s}
+.fl-del-ea:hover{color:#f87171}
+.fl-compose-ea{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:10px}
+.fl-date-row-ea{display:flex;align-items:center;gap:8px;margin:8px 0}
+.fl-date-lbl-ea{font-size:10px;color:var(--muted);white-space:nowrap;letter-spacing:.05em;font-weight:700}
+.fl-date-input-ea{background:rgba(255,255,255,.05);border:1px solid var(--border2);border-radius:6px;padding:6px 10px;color:var(--text);font-family:'Nunito',sans-serif;font-size:11px;outline:none}
+
+/* ── WHY / ROADMAP ── */
+.why-card-ea{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:10px}
+.why-title-ea{font-family:'Cinzel',serif;font-size:1.2rem;font-weight:600;background:linear-gradient(135deg,var(--elsa),var(--anna));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:14px;text-align:center;letter-spacing:.05em}
+.why-p-ea{font-size:12px;color:var(--muted);line-height:2;margin-bottom:10px}
+.why-task-item-ea{display:flex;align-items:flex-start;gap:8px;padding:8px 0;border-bottom:1px solid var(--border)}
+.why-task-item-ea:last-child{border-bottom:none}
+.roadmap-card-ea{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:10px}
+.roadmap-step-ea{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}
+.roadmap-step-ea:last-child{border-bottom:none}
+.rnum-ea{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;font-family:'Cinzel',serif}
+.rtitle-ea{font-size:12px;font-weight:700;color:var(--text);margin-bottom:3px}
+.rdesc-ea{font-size:10px;color:var(--muted2);line-height:1.7}
+
+/* ── PWA INSTALL BANNER ── */
+.pwa-banner-ea{position:fixed;bottom:70px;left:50%;transform:translateX(-50%);background:rgba(7,9,26,.9);border:1px solid rgba(100,181,246,.3);border-radius:12px;padding:12px 16px;z-index:200;display:flex;align-items:center;gap:12px;font-size:12px;color:#fff;white-space:nowrap;box-shadow:0 8px 32px rgba(0,0,0,.5);backdrop-filter:blur(14px)}
+
+/* ── SECTION LABEL ── */
+.sec-lbl-ea{font-size:8px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin:18px 0 8px;display:flex;align-items:center;gap:8px}
+.sec-lbl-ea::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── SETTINGS PAGE ── */
+.settings-card-ea{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:8px}
+.setting-row-ea{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}
+.setting-row-ea:last-child{border-bottom:none}
+.setting-name-ea{font-size:12px;color:var(--text)}
+.setting-sub-ea{font-size:10px;color:var(--muted);margin-top:1px}
+.toggle-switch-ea{position:relative;width:40px;height:22px;cursor:pointer}
+.toggle-switch-ea input{opacity:0;width:0;height:0}
+.toggle-track-ea{position:absolute;inset:0;border-radius:11px;background:var(--border2);transition:.3s}
+.toggle-track-ea::before{content:'';position:absolute;width:16px;height:16px;left:3px;top:3px;border-radius:50%;background:var(--muted);transition:.3s}
+input:checked+.toggle-track-ea{background:var(--elsa)}
+input:checked+.toggle-track-ea::before{transform:translateX(18px);background:#fff}
+
+/* ── PAGE VISIBILITY ── */
+.page-ea{display:none}
+.page-ea.visible{display:block}
+
+/* ── TOAST ── */
+.toast-ea{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);z-index:300;display:flex;flex-direction:column;align-items:center;gap:6px;pointer-events:none}
+.toast-item-ea{background:rgba(7,9,26,.85);backdrop-filter:blur(14px);border:1px solid rgba(100,181,246,.25);border-radius:999px;padding:9px 18px;font-size:12px;color:#fff;letter-spacing:.04em;box-shadow:0 8px 28px rgba(0,0,0,.4);transition:all .3s}
+
+@media (max-width:640px){
+  .amb-dock-ea{right:8px;top:auto;bottom:72px;transform:none;flex-direction:row}
+  .affirm-ea{bottom:64px}
+}
+
+      </style>
   </head>
   <body>
     <!-- ══ PIN SCREEN ══ -->
@@ -3014,7 +3107,19 @@
           <button class="nav-btn" id="navSister" onclick="showPage('sister')">
             <span class="nav-icon">💎</span><span>Sisters</span>
           </button>
-          <button class="nav-btn" id="navLetters" onclick="showPage('letters')">
+          <button class="nav-btn" id="navWhy" onclick="showPage('why')">
+              <span class="nav-icon">💗</span>
+              <span>Why</span>
+            </button>
+            <button class="nav-btn" id="navRoadmap" onclick="showPage('roadmap')">
+              <span class="nav-icon">🗺️</span>
+              <span>Roadmap</span>
+            </button>
+            <button class="nav-btn" id="navSettings" onclick="showPage('settings')">
+              <span class="nav-icon">⚙️</span>
+              <span>Settings</span>
+            </button>
+            <button class="nav-btn" id="navLetters" onclick="showPage('letters')">
             <span class="nav-icon">💌</span><span>Letters</span>
           </button>
           <div class="sb-divider"></div>
@@ -3358,6 +3463,8 @@
 
             <!-- Letters List -->
             <div class="letters-list" id="lettersList"></div>
+            <!-- TIME CAPSULE LETTERS (injected by JS) -->
+            <div id="futureSectionEA" style="margin-top:16px"></div>
 
             <!-- Compose Modal -->
             <div
@@ -3404,7 +3511,45 @@
           </div>
         </div>
 
-        <!-- RIGHT PANEL -->
+
+          <!-- WHY PAGE -->
+          <div class="page page-ea" id="pageWhy" style="display:none">
+            <div style="padding:4px 0 16px">
+              <div style="font-family:'Cinzel',serif;font-size:1.4rem;font-weight:600;color:var(--text);letter-spacing:.05em;margin-bottom:4px">💗 Why We Do This</div>
+              <div style="font-size:10px;color:var(--muted);font-style:italic">motivation & heart notes</div>
+            </div>
+            <div id="whyCardSection"></div>
+            <div class="sec-lbl-ea">your why notes ✦</div>
+            <div class="why-card-ea">
+              <textarea id="why-input" style="width:100%;background:transparent;border:1px solid var(--border);border-radius:8px;padding:8px 10px;color:var(--text);font-family:'Nunito',sans-serif;font-size:12px;resize:none;outline:none;min-height:60px;box-sizing:border-box" placeholder="Write a reason that keeps you going…"></textarea>
+              <div style="display:flex;gap:8px;margin-top:8px">
+                <button onclick="addWhyNote()" style="padding:7px 16px;border-radius:6px;border:none;background:var(--accent);color:#07091a;font-family:'Nunito',sans-serif;font-size:11px;font-weight:700;cursor:pointer">Add Note ✦</button>
+              </div>
+            </div>
+            <div id="why-list"></div>
+
+
+          </div>
+
+          <!-- ROADMAP PAGE -->
+          <div class="page page-ea" id="pageRoadmap" style="display:none">
+            <div style="padding:4px 0 16px">
+              <div style="font-family:'Cinzel',serif;font-size:1.4rem;font-weight:600;color:var(--text);letter-spacing:.05em;margin-bottom:4px">🗺️ Roadmap</div>
+              <div style="font-size:10px;color:var(--muted);font-style:italic">the path ahead ✦</div>
+            </div>
+            <div id="roadmap-content"></div>
+          </div>
+
+          <!-- SETTINGS PAGE -->
+          <div class="page page-ea" id="pageSettings" style="display:none">
+            <div style="padding:4px 0 16px">
+              <div style="font-family:'Cinzel',serif;font-size:1.4rem;font-weight:600;color:var(--text);letter-spacing:.05em;margin-bottom:4px">⚙️ Settings</div>
+              <div style="font-size:10px;color:var(--muted);font-style:italic">preferences & data</div>
+            </div>
+            <div id="settings-content"></div>
+          </div>
+
+                <!-- RIGHT PANEL -->
         <div class="right-panel">
           <!-- Productivity Ring -->
           <div class="rp-ring-card">
@@ -5219,6 +5364,563 @@ const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
         // Show PIN screen on every load
         updateDots();
       });
-    </script>
+    
+      // ══════════════════════════════════════════════════════
+      // ELSAANNA — ADDED FEATURES FROM VELARIS
+      // ══════════════════════════════════════════════════════
+
+      // ── SUPABASE KEYS for new data ──
+      const LS_KEY_EA = 'elsaanna_ext';       // extended state (rough day, why, time capsule)
+      const LAST_SEEN_KEY_EA = 'elsaanna_lastseen';
+      const TODAY_EA = new Date().toISOString().split('T')[0];
+
+      // ── EXTENDED STATE ──
+      let extState = { roughDay:{}, whyNotes:[], futureLetters:[], mood:{} };
+
+      async function loadExtState(){
+        const v = await sbGet(LS_KEY_EA);
+        if(v){ try{ const p=typeof v==='string'?JSON.parse(v):v; Object.assign(extState,p); }catch(e){} }
+        ensureExtState();
+      }
+      function ensureExtState(){
+        if(!extState.roughDay)extState.roughDay={};
+        if(!extState.whyNotes)extState.whyNotes=[];
+        if(!extState.futureLetters)extState.futureLetters=[];
+        if(!extState.mood)extState.mood={};
+        if(!extState.roadmap)extState.roadmap={elsa:[],anna:[]};
+      }
+      async function saveExtState(){ await sbSet(LS_KEY_EA, JSON.stringify(extState)); }
+
+      // ── LAST SEEN ──
+      async function updateLastSeenEA(){
+        const now=new Date();
+        const raw=await sbGet(LAST_SEEN_KEY_EA);
+        const d=raw?JSON.parse(raw):{};
+        d[state.user]=now.toISOString();
+        await sbSet(LAST_SEEN_KEY_EA,JSON.stringify(d));
+      }
+      async function renderLastSeenEA(){
+        const bar=document.getElementById('lastSeenBar');
+        if(!bar)return;
+        try{
+          const raw=await sbGet(LAST_SEEN_KEY_EA);
+          if(!raw){bar.textContent='';return;}
+          const d=JSON.parse(raw);
+          const other=state.user==='elsa'?'anna':'elsa';
+          const ts=d[other];
+          if(!ts){bar.textContent='';return;}
+          const diff=Math.floor((new Date()-new Date(ts))/60000);
+          const name=other==='elsa'?'❄️ Elsa':'🌸 Anna';
+          let ago=diff<1?'just now':diff<60?diff+' min ago':diff<1440?Math.floor(diff/60)+' hr ago':Math.floor(diff/1440)+' day ago';
+          bar.textContent=`${name} was here ${ago} ✦`;
+        }catch(e){bar.textContent='';}
+      }
+
+      // ── ANNIVERSARY BANNER ──
+      function renderAnnivEA(){
+        // Sisters' bond since birth — use a symbolic date or skip, show "Sisters Forever"
+        const banner=document.getElementById('annivBanner');
+        const daysEl=document.getElementById('annivDays');
+        if(banner&&daysEl){
+          banner.style.display='block';
+          daysEl.textContent='Sisters ✦ Always';
+        }
+      }
+
+      // ── MOOD CHECK-IN ──
+      const MOOD_MESSAGES_EA={
+        soft:`🌸 Noted softly. Be gentle with yourself today.`,
+        glowing:`✨ That glow looks so good on you!`,
+        calm:`😌 Hold onto that calm. It serves you.`,
+        tender:`💙 It's okay to feel tender. I'm here.`,
+        tired:`🌙 Rest is sacred. Close your eyes when you can.`
+      };
+      function logMoodEA(m){
+        extState.mood[TODAY_EA]=m;
+        saveExtState();
+        showToastEA(MOOD_MESSAGES_EA[m]||'noted ✦');
+      }
+
+      // ── ROUGH DAY ──
+      function renderRoughDay(){
+        const sec=document.getElementById('roughDaySection');
+        const card=document.getElementById('roughDayCard');
+        if(!sec||!card)return;
+        sec.style.display='block';
+        const isRough=!!extState.roughDay[TODAY_EA+'-'+state.user];
+        if(isRough){
+          card.innerHTML=`<div class="rough-active">🌸 Taking it slow today. That's okay.<br><span style="font-size:10px;opacity:.7">Streak safe. Be gentle.</span></div>`;
+        }else{
+          card.innerHTML=`<div style="text-align:center;padding:10px"><button class="soft-btn" onclick="enableRoughDayEA()">😔 Taking it slow today</button><div style="font-size:10px;color:var(--muted);margin-top:6px">Streak protected · No guilt</div></div>`;
+        }
+      }
+      function enableRoughDayEA(){
+        extState.roughDay[TODAY_EA+'-'+state.user]=true;
+        saveExtState().then(()=>{renderRoughDay();showToastEA('🌸 Taking it slow. Rest well.');});
+      }
+
+      // ── TIME CAPSULE / FUTURE LETTERS ──
+      function renderFutureLettersEA(){
+        const c=document.getElementById('futureSectionEA');
+        if(!c)return;
+        c.innerHTML='';
+        const lbl=document.createElement('div');lbl.className='sec-lbl-ea';lbl.textContent='time capsule letters ✦';c.appendChild(lbl);
+        const compose=document.createElement('div');compose.className='fl-compose-ea';
+        const tmr=new Date();tmr.setDate(tmr.getDate()+1);
+        const def=new Date();def.setMonth(def.getMonth()+3);
+        const isElsa=state.user==='elsa';
+        compose.innerHTML=`
+          <div style="font-size:9px;font-weight:800;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px">✍ Write a letter to the future</div>
+          <textarea style="width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;padding:8px 10px;color:var(--text);font-family:'Nunito',sans-serif;font-size:12px;resize:none;outline:none;min-height:70px" id="fl-text-ea" placeholder="Dear future me... By the time you read this..."></textarea>
+          <div class="fl-date-row-ea">
+            <div class="fl-date-lbl-ea">Open on:</div>
+            <input type="date" class="fl-date-input-ea" id="fl-date-ea" min="${tmr.toISOString().split('T')[0]}" value="${def.toISOString().split('T')[0]}">
+          </div>
+          <button onclick="saveFutureLetterEA()" style="padding:7px 16px;border-radius:6px;border:none;background:var(--accent);color:#07091a;font-family:'Nunito',sans-serif;font-size:11px;font-weight:700;cursor:pointer;margin-top:6px">Seal & Lock 🔒</button>`;
+        c.appendChild(compose);
+        const myLetters=(extState.futureLetters||[]).filter(l=>l.from===state.user).sort((a,b)=>new Date(a.openDate)-new Date(b.openDate));
+        if(!myLetters.length){
+          const empty=document.createElement('div');empty.style.cssText='text-align:center;padding:20px;color:var(--muted2);font-size:12px;font-style:italic';empty.textContent='No sealed letters yet ✦';c.appendChild(empty);return;
+        }
+        myLetters.forEach(letter=>{
+          const canOpen=TODAY_EA>=letter.openDate;
+          const card=document.createElement('div');
+          card.className='fl-card-ea '+(canOpen?'fl-unlocked-ea':'fl-locked-ea');
+          const openD=new Date(letter.openDate+'T00:00:00');
+          const dateStr=openD.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+          const cls=canOpen?'fl-date-open':isElsa?'fl-date-elsa':'fl-date-anna';
+          if(canOpen){
+            card.innerHTML=`<div class="fl-lock-icon-ea">💌</div><div class="fl-card-date-ea ${cls}">Opened — ${dateStr}</div><div class="fl-preview-ea">${letter.text.replace(/\n/g,'<br>')}</div><button class="fl-del-ea" onclick="deleteFutureLetterEA('${letter.id}')">🗑</button>`;
+          }else{
+            const daysLeft=Math.ceil((new Date(letter.openDate)-new Date(TODAY_EA))/86400000);
+            card.innerHTML=`<div class="fl-lock-icon-ea">🔒</div><div class="fl-card-date-ea ${cls}">Opens ${dateStr} · ${daysLeft} day${daysLeft===1?'':'s'} away</div><div class="fl-locked-txt">This letter is sealed. Come back on ${dateStr} to read it ✦</div><button class="fl-del-ea" onclick="deleteFutureLetterEA('${letter.id}')">🗑</button>`;
+          }
+          c.appendChild(card);
+        });
+      }
+      function saveFutureLetterEA(){
+        const text=document.getElementById('fl-text-ea').value.trim();
+        const date=document.getElementById('fl-date-ea').value;
+        if(!text){showToastEA('Write something first ✦');return;}
+        if(!date){showToastEA('Pick a date 📅');return;}
+        extState.futureLetters.push({id:Date.now().toString(),from:state.user,text,openDate:date,createdOn:TODAY_EA});
+        saveExtState().then(()=>{renderFutureLettersEA();showToastEA('Sealed with love 🔒');});
+      }
+      function deleteFutureLetterEA(id){
+        if(!confirm('Delete this letter?'))return;
+        extState.futureLetters=extState.futureLetters.filter(l=>l.id!==id);
+        saveExtState().then(()=>renderFutureLettersEA());
+      }
+
+      // ── WHY NOTES ──
+      function renderWhyEA(){
+        const cardSec=document.getElementById('whyCardSection');
+        if(cardSec){
+          cardSec.innerHTML=`
+            <div class="why-card-ea">
+              <div class="why-title-ea">✦ Why We Bloom ✦</div>
+              <div class="why-p-ea">Because we promised each other. Because the late nights, the hard days, the small wins — all of it adds up to something beautiful we're building together.</div>
+              <div class="why-p-ea">One skill at a time. One day at a time. For the future we've always imagined. ❄️🌸</div>
+            </div>`;
+        }
+        const list=document.getElementById('why-list');
+        if(!list)return;
+        list.innerHTML='';
+        const notes=extState.whyNotes||[];
+        if(!notes.length){
+          list.innerHTML='<div style="text-align:center;padding:16px;color:var(--muted2);font-size:12px;font-style:italic">No personal notes yet ✦<br>Add one above.</div>';
+          return;
+        }
+        notes.forEach((note,i)=>{
+          const div=document.createElement('div');div.className='why-task-item-ea';
+          if(note.editing){
+            div.innerHTML=`<div style="flex:1"><textarea style="width:100%;background:transparent;border:1px solid var(--border);border-radius:6px;padding:6px 8px;color:var(--text);font-family:'Nunito',sans-serif;font-size:12px;resize:none;outline:none" id="why-edit-${i}">${note.text}</textarea></div><div style="display:flex;gap:4px;flex-shrink:0;margin-top:4px"><button onclick="saveWhyNoteEA(${i})" style="padding:5px 10px;border-radius:6px;border:none;background:var(--accent);color:#07091a;font-size:10px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif">Save</button><button onclick="cancelWhyEditEA(${i})" style="padding:5px 10px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:10px;cursor:pointer;font-family:'Nunito',sans-serif">Cancel</button></div>`;
+          }else{
+            div.innerHTML=`<div style="flex:1;font-size:12px;color:rgba(255,255,255,.78);line-height:1.8">${note.text.replace(/\n/g,'<br>')}</div><div style="display:flex;gap:4px;flex-shrink:0"><button onclick="editWhyNoteEA(${i})" style="background:transparent;border:1px solid var(--border);color:var(--muted2);padding:4px 9px;border-radius:6px;font-size:10px;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='var(--elsa)';this.style.color='var(--elsa)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted2)'">✏️</button><button onclick="deleteWhyNoteEA(${i})" style="background:transparent;border:1px solid var(--border);color:var(--muted2);padding:4px 9px;border-radius:6px;font-size:10px;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='#f87171';this.style.color='#f87171'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted2)'">🗑️</button></div>`;
+          }
+          list.appendChild(div);
+        });
+      }
+      function addWhyNote(){
+        const val=document.getElementById('why-input').value.trim();
+        if(!val){showToastEA('Write something first ✦');return;}
+        extState.whyNotes.unshift({text:val,editing:false});
+        document.getElementById('why-input').value='';
+        saveExtState().then(()=>{renderWhyEA();showToastEA('Added ✦');});
+      }
+      function editWhyNoteEA(i){extState.whyNotes[i].editing=true;renderWhyEA();}
+      function saveWhyNoteEA(i){
+        const val=document.getElementById('why-edit-'+i).value.trim();
+        if(!val){showToastEA('Cannot be empty');return;}
+        extState.whyNotes[i].text=val;extState.whyNotes[i].editing=false;
+        saveExtState().then(()=>{renderWhyEA();showToastEA('Updated ✦');});
+      }
+      function cancelWhyEditEA(i){extState.whyNotes[i].editing=false;renderWhyEA();}
+      function deleteWhyNoteEA(i){
+        if(!confirm('Delete this note?'))return;
+        extState.whyNotes.splice(i,1);
+        saveExtState().then(()=>{renderWhyEA();showToastEA('Deleted');});
+      }
+
+      // ── ROADMAP ──
+      // ── ROADMAP CRUD ──
+      const ROADMAP_DEFAULTS_EA = {
+        elsa: [
+          {title:'Now → Aug 24, 2026', desc:'SAP, Python, SQL, Excel, Power BI — 5 hrs/day. English daily. Walk in ready.'},
+          {title:'Aug 24, 2026 — EY GDS Day 1', desc:'SAP + data analytics role. All this preparation will make sense on that morning.'},
+          {title:'6–12 months in', desc:'Real project experience. SAP certification. English confidence growing at work.'},
+          {title:'Year 2+', desc:'Senior analyst → AI/ML → higher CTC. Already on track.'},
+        ],
+        anna: [
+          {title:'Now — Build the foundation', desc:'Python, SQL, DBMS, Analytics. Every day of practice compounds into expertise.'},
+          {title:'3–6 months — Projects & Portfolio', desc:'Build real projects. Document them. Publish. Let the work speak for you.'},
+          {title:'6–12 months — Analytics Role', desc:'Data Analyst / BI Developer roles. Your portfolio will open doors.'},
+          {title:'Year 2+', desc:'Senior Analyst → Data Scientist. The bloom is slow, but it is coming. 🌸'},
+        ]
+      };
+
+      function getRoadmapStepsEA(who){
+        if(!extState.roadmap) extState.roadmap={};
+        if(!extState.roadmap[who] || !extState.roadmap[who].length){
+          extState.roadmap[who] = ROADMAP_DEFAULTS_EA[who].map((s,i)=>({id:'rm_'+who+'_'+i, title:s.title, desc:s.desc}));
+        }
+        return extState.roadmap[who];
+      }
+
+      function renderRoadmapEA(){
+        const c=document.getElementById('roadmap-content');
+        if(!c)return;
+        c.innerHTML='';
+        const u=state.user;
+        const isElsa=u==='elsa';
+        const ac=isElsa?'var(--elsa)':'var(--anna)';
+        const acd=isElsa?'rgba(100,181,246,.12)':'rgba(244,143,177,.12)';
+
+        // ── Add form ──
+        const addBox=document.createElement('div');addBox.className='why-card-ea';addBox.style.marginBottom='10px';
+        addBox.innerHTML=`
+          <div style="font-size:9px;font-weight:800;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px">+ add milestone</div>
+          <input id="rme-title" placeholder="Milestone title…" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:7px;padding:8px 10px;color:var(--text);font-family:'Nunito',sans-serif;font-size:12px;outline:none;margin-bottom:6px;box-sizing:border-box"/>
+          <textarea id="rme-desc" rows="2" placeholder="Description…" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:7px;padding:8px 10px;color:var(--text);font-family:'Nunito',sans-serif;font-size:12px;outline:none;resize:none;margin-bottom:8px;box-sizing:border-box"></textarea>
+          <button onclick="addRoadmapStepEA()" style="padding:7px 18px;border-radius:6px;border:none;background:var(--accent);color:#07091a;font-family:'Nunito',sans-serif;font-size:11px;font-weight:700;cursor:pointer">Add ✦</button>`;
+        c.appendChild(addBox);
+
+        // ── Steps ──
+        const steps=getRoadmapStepsEA(u);
+        if(!steps.length){
+          const empty=document.createElement('div');empty.style.cssText='text-align:center;padding:20px;color:var(--muted2);font-size:12px;font-style:italic';
+          empty.textContent='No milestones yet ✦ Add one above.';c.appendChild(empty);return;
+        }
+        const card=document.createElement('div');card.className='roadmap-card-ea';
+        steps.forEach((s,i)=>{
+          const row=document.createElement('div');row.className='roadmap-step-ea';
+          if(s.editing){
+            row.innerHTML=`
+              <div class="rnum-ea" style="background:${acd};color:${ac}">${i+1}</div>
+              <div style="flex:1">
+                <input id="rme-et-${i}" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:7px;padding:7px 9px;color:var(--text);font-family:'Nunito',sans-serif;font-size:12px;outline:none;margin-bottom:5px;box-sizing:border-box" value="${s.title.replace(/"/g,'&quot;')}"/>
+                <textarea id="rme-ed-${i}" rows="2" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:7px;padding:7px 9px;color:var(--text);font-family:'Nunito',sans-serif;font-size:11px;outline:none;resize:none;box-sizing:border-box">${s.desc}</textarea>
+                <div style="display:flex;gap:6px;margin-top:6px">
+                  <button onclick="saveRoadmapStepEA(${i})" style="padding:5px 14px;border-radius:6px;border:none;background:var(--accent);color:#07091a;font-family:'Nunito',sans-serif;font-size:10px;font-weight:700;cursor:pointer">Save</button>
+                  <button onclick="cancelRoadmapEditEA(${i})" style="padding:5px 14px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'Nunito',sans-serif;font-size:10px;cursor:pointer">Cancel</button>
+                </div>
+              </div>`;
+          } else {
+            row.innerHTML=`
+              <div class="rnum-ea" style="background:${acd};color:${ac}">${i+1}</div>
+              <div style="flex:1"><div class="rtitle-ea">${s.title}</div><div class="rdesc-ea">${s.desc}</div></div>
+              <div style="display:flex;gap:4px;flex-shrink:0;margin-left:8px">
+                <button onclick="editRoadmapStepEA(${i})" style="background:transparent;border:1px solid var(--border);color:var(--muted2);padding:4px 9px;border-radius:6px;font-size:10px;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='${ac}';this.style.color='${ac}'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted2)'">✎</button>
+                <button onclick="deleteRoadmapStepEA(${i})" style="background:transparent;border:1px solid var(--border);color:var(--muted2);padding:4px 9px;border-radius:6px;font-size:10px;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='#f87171';this.style.color='#f87171'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted2)'">🗑</button>
+              </div>`;
+          }
+          card.appendChild(row);
+        });
+        c.appendChild(card);
+      }
+
+      function addRoadmapStepEA(){
+        const t=document.getElementById('rme-title').value.trim();
+        const d=document.getElementById('rme-desc').value.trim();
+        if(!t){showToastEA('Enter a title ✦');return;}
+        if(!extState.roadmap)extState.roadmap={};
+        getRoadmapStepsEA(state.user);
+        extState.roadmap[state.user].push({id:'rm_'+state.user+'_'+Date.now(),title:t,desc:d||'—'});
+        saveExtState().then(()=>{renderRoadmapEA();showToastEA('Milestone added ✦');});
+      }
+      function editRoadmapStepEA(i){ getRoadmapStepsEA(state.user)[i].editing=true; renderRoadmapEA(); }
+      function saveRoadmapStepEA(i){
+        const t=document.getElementById('rme-et-'+i).value.trim();
+        const d=document.getElementById('rme-ed-'+i).value.trim();
+        if(!t){showToastEA('Title cannot be empty');return;}
+        const s=getRoadmapStepsEA(state.user)[i];
+        s.title=t; s.desc=d||'—'; s.editing=false;
+        saveExtState().then(()=>{renderRoadmapEA();showToastEA('Updated ✦');});
+      }
+      function cancelRoadmapEditEA(i){ getRoadmapStepsEA(state.user)[i].editing=false; renderRoadmapEA(); }
+      function deleteRoadmapStepEA(i){
+        if(!confirm('Delete this milestone?'))return;
+        getRoadmapStepsEA(state.user).splice(i,1);
+        saveExtState().then(()=>{renderRoadmapEA();showToastEA('Deleted');});
+      }
+
+      // ── SETTINGS ──
+      function renderSettingsEA(){
+        const c=document.getElementById('settings-content');
+        if(!c)return;
+        c.innerHTML='';
+        const pinCard=document.createElement('div');pinCard.className='settings-card-ea';
+        pinCard.innerHTML=`
+          <div style="font-size:9px;font-weight:800;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px">data & settings</div>
+          <div class="setting-row-ea"><div><div class="setting-name-ea">Change PIN</div><div class="setting-sub-ea">update your shared 4-digit PIN</div></div></div>
+          <div style="display:flex;gap:6px;margin:8px 0 14px">
+            <input type="password" id="new-pin-ea" maxlength="4" placeholder="New 4-digit PIN" style="flex:1;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:6px;padding:7px 10px;color:var(--text);font-family:'Nunito',sans-serif;font-size:12px;outline:none">
+            <button onclick="changePinEA()" style="padding:7px 14px;border-radius:6px;border:none;background:var(--accent);color:#07091a;font-family:'Nunito',sans-serif;font-size:11px;font-weight:700;cursor:pointer">Save</button>
+          </div>
+          <div class="setting-row-ea"><div><div class="setting-name-ea">Export Data</div><div class="setting-sub-ea">download all task history</div></div>
+            <button onclick="exportDataEA()" style="padding:6px 14px;border-radius:6px;border:1px solid rgba(100,181,246,.3);background:rgba(100,181,246,.1);color:var(--elsa);font-family:'Nunito',sans-serif;font-size:10px;font-weight:700;cursor:pointer">↓ Export</button>
+          </div>
+          <div class="setting-row-ea"><div><div class="setting-name-ea" style="color:#f87171">Clear All Data</div><div class="setting-sub-ea">cannot be undone</div></div>
+            <button onclick="clearAllEA()" style="padding:6px 14px;border-radius:6px;border:1px solid rgba(248,113,113,.3);background:rgba(248,113,113,.1);color:#f87171;font-family:'Nunito',sans-serif;font-size:10px;font-weight:700;cursor:pointer">🗑 Clear</button>
+          </div>
+          <div style="margin-top:14px;font-size:11px;color:var(--muted);line-height:2">
+            ✦ ELSAANNA — A space for two sisters. 💙<br>
+            ✦ Real-time sync via Supabase.<br>
+            ✦ PIN-protected with SHA-256 hashing.<br>
+            ✦ "For always." ❄️🌸
+          </div>`;
+        c.appendChild(pinCard);
+      }
+      async function changePinEA(){
+        const val=document.getElementById('new-pin-ea').value.trim();
+        if(val.length!==4||isNaN(val)){showToastEA('PIN must be 4 digits');return;}
+        const h=await hashPin(val);
+        await sbSet(PIN_KEY,h);
+        showToastEA('PIN updated ✦');
+      }
+      async function clearAllEA(){
+        if(!confirm('Delete ALL ELSAANNA data?'))return;
+        if(!confirm('Really sure? Cannot undo.'))return;
+        try{
+          await fetch(`${SB_URL}/rest/v1/couple_data?key=in.(${DB_KEY},${PIN_KEY},${LS_KEY_EA})`,{method:'DELETE',headers:{apikey:SB_KEY,'Authorization':'Bearer '+SB_KEY}});
+        }catch(e){}
+        location.reload();
+      }
+      function exportDataEA(){
+        const rows=[['User','Date','Task','Done']];
+        ['elsa','anna'].forEach(u=>{
+          const done=state.tasksDone||{};
+          Object.keys(done).filter(k=>k.startsWith(u+'-')).forEach(k=>{
+            const id=k.split('-').slice(1).join('-');
+            rows.push([u,TODAY_EA,id,done[k]?'Yes':'No']);
+          });
+        });
+        const csv=rows.map(r=>r.join(',')).join('\n');
+        const a=document.createElement('a');a.href='data:text/csv,'+encodeURIComponent(csv);a.download='ELSAANNA_data_'+TODAY_EA+'.csv';a.click();
+        showToastEA('↓ Downloaded ✦');
+      }
+
+      // ── PWA ──
+      function setupPWAEA(){
+        const manifest={name:'ELSAANNA',short_name:'ELSAANNA',description:'A space for two sisters. ❄️🌸',start_url:location.href,display:'standalone',background_color:'#07091a',theme_color:'#07091a',orientation:'portrait',icons:[{src:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" fill="%2307091a"/><text y="320" x="60" font-size="320" fill="%2364b5f6">❄️</text></svg>',sizes:'512x512',type:'image/svg+xml'}]};
+        const blob=new Blob([JSON.stringify(manifest)],{type:'application/json'});
+        // create a link element for manifest
+        const link=document.createElement('link');link.rel='manifest';link.href=URL.createObjectURL(blob);document.head.appendChild(link);
+        if('serviceWorker' in navigator){
+          const sw='const C="ea-v1";self.addEventListener("install",e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(["/"])));self.skipWaiting();});self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==C).map(k=>caches.delete(k)))));self.clients.claim();});self.addEventListener("fetch",e=>{e.respondWith(fetch(e.request).catch(()=>caches.match(e.request)));});';
+          const swBlob=new Blob([sw],{type:'application/javascript'});
+          navigator.serviceWorker.register(URL.createObjectURL(swBlob)).catch(()=>{});
+        }
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt',e=>{
+          e.preventDefault();deferredPrompt=e;
+          setTimeout(()=>{if(deferredPrompt)showPWABannerEA();},3000);
+        });
+        function showPWABannerEA(){
+          if(document.querySelector('.pwa-banner-ea'))return;
+          const b=document.createElement('div');b.className='pwa-banner-ea';
+          b.innerHTML='<span>✦ Add ELSAANNA to home screen</span><button onclick="installPWAEA()" style="background:var(--elsa);color:#07091a;border:none;border-radius:6px;padding:6px 12px;font-size:11px;font-weight:700;cursor:pointer;font-family:Nunito,sans-serif">Install</button><button onclick="this.parentElement.remove()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px">×</button>';
+          document.body.appendChild(b);
+        }
+        window.installPWAEA=async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;};
+      }
+
+      // ── MOTIVATIONAL TICKER ──
+      function setupTickerEA(){
+        const lines=[
+          'slow progress is still progress ✦',
+          'you are safe here 💙',
+          'rest without guilt — you have earned it',
+          'breathe. one small step is enough today',
+          'you are becoming, quietly and beautifully ❄️🌸',
+          'sisters bloom together',
+          'tomorrow will still love you',
+          'this moment is yours to keep'
+        ];
+        const a=document.createElement('div');a.className='affirm-ea';document.body.appendChild(a);
+        let i=0;
+        function cycle(){
+          a.textContent=lines[i%lines.length];a.classList.add('show');
+          setTimeout(()=>a.classList.remove('show'),6500);i++;
+        }
+        setTimeout(cycle,2000);setInterval(cycle,11000);
+      }
+
+      // ── AMBIENT DOCK ──
+      function setupAmbientEA(){
+        const dock=document.createElement('div');dock.className='amb-dock-ea';
+        dock.innerHTML='<button class="amb-btn-ea" id="amb-glow-ea" title="Ambient glow">✦</button><button class="amb-btn-ea" id="amb-rain-ea" title="Rain sounds">🌧</button>';
+        document.body.appendChild(dock);
+        document.getElementById('amb-glow-ea').onclick=function(){
+          document.body.classList.toggle('ambient-glow-ea');this.classList.toggle('on');
+          if(document.body.classList.contains('ambient-glow-ea'))document.body.style.filter='saturate(1.1) brightness(1.04)';
+          else document.body.style.filter='';
+        };
+        let audio=null;
+        document.getElementById('amb-rain-ea').onclick=function(){
+          if(!audio){audio=new Audio('https://cdn.pixabay.com/download/audio/2022/03/15/audio_8cb749cae4.mp3?filename=rain-and-thunder-nature-sounds-8009.mp3');audio.loop=true;audio.volume=.35;}
+          if(audio.paused){audio.play().catch(()=>{});this.classList.add('on');}
+          else{audio.pause();this.classList.remove('on');}
+        };
+      }
+
+      // ── TOAST (ELSAANNA style) ──
+      // Replace the existing showToast to also work here
+      function showToastEA(msg){
+        let wrap=document.getElementById('toastEA');
+        if(!wrap){wrap=document.createElement('div');wrap.id='toastEA';wrap.className='toast-ea';document.body.appendChild(wrap);}
+        const el=document.createElement('div');el.className='toast-item-ea';el.textContent=msg;
+        wrap.appendChild(el);
+        setTimeout(()=>{el.style.opacity='0';el.style.transform='translateY(4px)';el.style.transition='all .3s';setTimeout(()=>el.remove(),300);},2500);
+      }
+
+      // ── REALTIME SYNC (EXTENDED) ──
+      function startRealtimeSyncExt(){
+        const wsUrl='wss://realtime.supabase.co/socket/websocket?apikey='+SB_KEY+'&vsn=1.0.0';
+        let ws,heartbeat;
+        function connect(){
+          try{ws=new WebSocket(wsUrl);}catch(e){startPollingExt();return;}
+          ws.onopen=()=>{
+            ws.send(JSON.stringify({topic:'realtime:public:couple_data:key=eq.'+DB_KEY,event:'phx_join',payload:{},ref:'1'}));
+            heartbeat=setInterval(()=>{if(ws.readyState===WebSocket.OPEN)ws.send(JSON.stringify({topic:'phoenix',event:'heartbeat',payload:{},ref:'hb'}));},25000);
+          };
+          ws.onmessage=async(e)=>{
+            try{
+              const msg=JSON.parse(e.data);
+              if(msg.event==='INSERT'||msg.event==='UPDATE'){
+                const fresh=await sbGet(DB_KEY);
+                if(fresh){const parsed=typeof fresh==='string'?JSON.parse(fresh):fresh;mergeState(parsed);renderAll();showToastEA('✦ Synced live');}
+              }
+            }catch(e){}
+          };
+          ws.onclose=()=>{clearInterval(heartbeat);setTimeout(connect,5000);};
+          ws.onerror=()=>ws.close();
+        }
+        connect();
+        startPollingExt();
+      }
+      let _syncInterval;
+      function startPollingExt(){
+        clearInterval(_syncInterval);
+        _syncInterval=setInterval(async()=>{
+          const fresh=await sbGet(DB_KEY);
+          if(fresh){const parsed=typeof fresh==='string'?JSON.parse(fresh):fresh;const prev=JSON.stringify({tasksDone:state.tasksDone,customTasks:state.customTasks,streaks:state.streaks,notes:state.notes});mergeState(parsed);if(JSON.stringify({tasksDone:state.tasksDone,customTasks:state.customTasks,streaks:state.streaks,notes:state.notes})!==prev){renderAll();showToastEA('✦ Synced');}}
+          renderLastSeenEA();
+        },30000);
+      }
+
+      // ── PATCH showPage to handle new pages ──
+      // ── REPLACED showPage — handles all pages including new ones ──
+      // (replaces original at line 4936 by being defined later in same scope)
+      function showPage(p){
+        state.page = p;
+        const origPages = ['today','notes','streaks','sister','letters'];
+        const newPages  = ['why','roadmap','settings'];
+        const allPages  = [...origPages, ...newPages];
+
+        // Hide all pages
+        allPages.forEach(id=>{
+          const el=document.getElementById('page'+id.charAt(0).toUpperCase()+id.slice(1));
+          if(!el) return;
+          if(origPages.includes(id)){
+            el.classList.toggle('visible', id===p);
+          } else {
+            el.style.display = (id===p) ? 'block' : 'none';
+            el.classList.toggle('visible', id===p);
+          }
+        });
+
+        // Nav active state
+        document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+        const navMap={
+          today:'navToday', notes:'navNotes', streaks:'navStreaks',
+          sister:'navSister', letters:'navLetters',
+          why:'navWhy', roadmap:'navRoadmap', settings:'navSettings'
+        };
+        if(navMap[p]) document.getElementById(navMap[p])?.classList.add('active');
+
+        // Original page callbacks
+        if(p==='notes')   updateNoteFields();
+        if(p==='sister')  renderSisterProgress();
+        if(p==='letters'){ renderLetters(); setTimeout(()=>{ if(document.getElementById('futureSectionEA')) renderFutureLettersEA(); },100); }
+
+        // New page callbacks
+        if(p==='why') renderWhyEA();
+        if(p==='roadmap')  renderRoadmapEA();
+        if(p==='settings') renderSettingsEA();
+
+        // Today extras
+        if(p==='today'){
+          renderRoughDay();
+          renderAnnivEA();
+          renderLastSeenEA();
+        }
+      }
+
+      // ── REPLACED switchUser — inlined original + ext renders ──
+      function switchUser(u){
+        state.user = u;
+        state.period = 'MORNING';
+        renderAll();
+        showPage(state.page || 'today');
+        renderRoughDay();
+        renderLastSeenEA();
+        updateLastSeenEA();
+      }
+
+      // ── BOOT NEW FEATURES ──
+      async function bootExtFeatures(){
+        await loadExtState();
+        renderRoughDay();
+        renderAnnivEA();
+        renderLastSeenEA();
+        updateLastSeenEA();
+        setupTickerEA();
+        setupAmbientEA();
+        setupPWAEA();
+      }
+
+      // ── Patch unlock() to also boot ext features ──
+      // _origUnlock removed - unlock() is fully replaced below
+      // Disable original sync - our ext version replaces it
+      startRealtimeSync = () => {};
+
+      async function unlock(){
+        // Hide pin, show app, load data
+        document.getElementById('pinScreen').style.display='none';
+        document.getElementById('app').style.display='block';
+        await initApp();
+        renderAll();
+        updateDots();
+        // Show the correct page (renderAll alone doesn't toggle visibility)
+        showPage(state.page || 'today');
+        // Boot new ext features
+        await bootExtFeatures();
+        renderFutureLettersEA();
+        // Start realtime sync (ext version replaces original)
+        startRealtimeSyncExt();
+      }
+
+      </script>
   </body>
 </html>
