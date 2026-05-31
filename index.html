@@ -2513,10 +2513,33 @@
           margin-right: auto;
         }
       }
+      /* ── Mobile Bottom Nav Bar base styles (hidden by default) ── */
+      #mobileBottomNav {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 500;
+        background: rgba(7, 9, 26, 0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-top: 1px solid rgba(255,255,255,0.12);
+        padding: 8px 4px 10px;
+        gap: 2px;
+        align-items: stretch;
+        justify-content: space-around;
+      }
+
       @media (max-width: 640px) {
         /* ── Hide the side sidebar entirely on mobile ── */
         .sidebar {
           display: none !important;
+        }
+
+        /* ── Show bottom nav on mobile ── */
+        #mobileBottomNav {
+          display: flex !important;
         }
 
         /* ── Main content fills full width, add bottom padding for nav bar ── */
@@ -2525,11 +2548,6 @@
           margin-right: 0 !important;
           padding: 14px 14px 80px;
           width: 100%;
-        }
-
-        /* ── Bottom navigation bar ── */
-        #mobileBottomNav {
-          display: flex !important;
         }
 
         .period-tabs {
@@ -2554,24 +2572,6 @@
         .letter-body {
           font-size: 12px;
         }
-      }
-
-      /* ── Mobile Bottom Nav Bar styles ── */
-      #mobileBottomNav {
-        display: none;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 500;
-        background: rgba(7, 9, 26, 0.92);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border-top: 1px solid rgba(255,255,255,0.10);
-        padding: 6px 4px env(safe-area-inset-bottom, 6px);
-        gap: 2px;
-        align-items: stretch;
-        justify-content: space-around;
       }
       .mob-nav-btn {
         flex: 1;
@@ -6052,7 +6052,7 @@ const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
           {id:'letters',  icon:'💌', label:'Letters'},
         ];
         const nav = document.getElementById('mobileBottomNav');
-        if(!nav) return;
+        if(!nav){ console.warn('mobileBottomNav not found'); return; }
 
         // Build page buttons
         pages.forEach(p => {
